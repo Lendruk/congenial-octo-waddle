@@ -1,5 +1,6 @@
 // @refresh reload
 import { Suspense } from "solid-js";
+import { trpc, client, queryClient } from './trpc';
 import {
   useLocation,
   A,
@@ -29,6 +30,7 @@ export default function Root() {
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Body>
+        <trpc.Provider client={client} queryClient={queryClient}>
         <Suspense>
           <ErrorBoundary>
             <nav class="bg-sky-800">
@@ -46,6 +48,7 @@ export default function Root() {
             </Routes>
           </ErrorBoundary>
         </Suspense>
+        </trpc.Provider>
         <Scripts />
       </Body>
     </Html>
