@@ -17,8 +17,12 @@
   "dependencies": {
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.7.0",
+    "@tanstack/solid-query": "^4.22.4",
+    "@trpc/client": "^10.9.0",
+    "@trpc/server": "^10.9.0",
     "solid-js": "^1.6.9",
     "solid-start": "^0.2.15",
+    "solid-trpc": "0.0.11-rc.2",
     "undici": "^5.15.1"
   },
   "engines": {
