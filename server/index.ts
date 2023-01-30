@@ -1,13 +1,13 @@
-import * as trpc from '@trpc/server';
-import { libraryRouter } from './services/library';
-import { mergeRouters, publicProcedure, router } from './trpc';
- 
-import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
-import fastify from 'fastify';
-import { createContext } from './context';
+import * as trpc from "@trpc/server";
+import { libraryRouter } from "./services/library";
+import { mergeRouters, publicProcedure, router } from "./trpc";
+
+import { fastifyTRPCPlugin } from "@trpc/server/adapters/fastify";
+import fastify from "fastify";
+import { createContext } from "./context";
 
 const appRouter = router({
-  greeting: publicProcedure.query(() => 'hello tRPC v10!'),
+  greeting: publicProcedure.query(() => "hello tRPC v10!"),
   library: libraryRouter,
 });
 
@@ -19,7 +19,7 @@ const server = fastify({
   maxParamLength: 5000,
 });
 server.register(fastifyTRPCPlugin, {
-  prefix: '/',
+  prefix: "/",
   trpcOptions: { router: appRouter, createContext },
 });
 (async () => {
