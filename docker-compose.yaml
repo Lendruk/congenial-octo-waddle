@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  media-browser-frontend:
+    build: 
+      context: ./client/
+      dockerfile: Dockerfile
+    container_name: media-app-frontend
+    depends_on:
+      - media-browser-backend
+    links:
+      - media-browser-backend
+    expose:
+      - '5173'
+    ports:
+      - 5173:5173
+    volumes:
+      - ./client:/app/frontend
+      - ./client/node_modules:/app/frontend/node_modules
+    working_dir: /app/frontend
+    command: npm run dev
+  media-browser-backend:
+    build: 
+      context: ./server/
+      dockerfile: Dockerfile
+    container_name: media-app-backend
+    volumes:
+      - ./server:/app/backend
+      - ./server/nodemon.json:/app/backend/nodemon.json
+      # - /app/backend/node_modules
+      # - ./server/node_modules:/app/backend/node_modules
+    ports:
+      - 3000:3000
+    expose:
+      - '3000'
+    depends_on:
+      - database
+    links:
+      - database
+    working_dir: /app/backend
+    command: npm run start-backend
+  database:
+    container_name: postgres
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=123123
+    ports:
+      - 5432:5432
