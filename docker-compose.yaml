@@ -24,9 +24,12 @@ services:
       dockerfile: Dockerfile
     container_name: media-app-backend
     volumes:
-      - ./server:/app/backend
-      - ./server/nodemon.json:/app/backend/nodemon.json
-      # - /app/backend/node_modules
+      - ./server:/app/server/
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./server/nodemon.json:/app/server/nodemon.json
+      # - /server/node_modules
+      # - /app/server/node_modules
       # - ./server/node_modules:/app/backend/node_modules
     ports:
       - 3000:3000
@@ -36,8 +39,10 @@ services:
       - database
     links:
       - database
-    working_dir: /app/backend
-    command: npm run start-backend
+    working_dir: /app/
+    command: pnpm start-backend
+    # command: ls -a
+    # command: find ./node_modules/ -type l -ls
   database:
     container_name: postgres
     image: postgres

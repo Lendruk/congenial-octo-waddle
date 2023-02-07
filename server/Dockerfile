@@ -1,12 +1,12 @@
 FROM node:16-bullseye
-WORKDIR /app/backend/
-
-ENV PNPM_HOME="/root/.local/share/pnpm"
-ENV PATH="${PATH}:${PNPM_HOME}"
-
-COPY package*.json .npmrc ../pnpm*.yaml /app/backend/
-# RUN npm install -g pnpm
 RUN corepack enable pnpm
+
+WORKDIR /app/
+COPY ../package*.json .
+COPY ../pnpm*.yaml .
+COPY package*.json /app/server/
 RUN pnpm fetch
 RUN pnpm install
+
+WORKDIR /app/server/
 COPY . .

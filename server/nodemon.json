@@ -1,7 +1,7 @@
 {
-  "watch": ["../server"],
+  "watch": ["./"],
   "ext": "ts",
-  "ignore": ["../server/**/*.spec.ts"],
+  "ignore": ["./**/*.spec.ts"],
   "exec": "ts-node ./index.ts",
   "execMap": {
     "ts": "node --inspect=0.0.0.0:9229 --nolazy -r ts-node/register"
