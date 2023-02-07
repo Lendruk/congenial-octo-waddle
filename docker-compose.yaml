@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   media-browser-frontend:
-    build: 
+    build:
       context: ./client/
       dockerfile: Dockerfile
     container_name: media-app-frontend
@@ -12,14 +12,15 @@ services:
     expose:
       - '5173'
     ports:
-      - 5173:5173
+      - 5173:3000
     volumes:
       - ./client:/app/frontend
-      - ./client/node_modules:/app/frontend/node_modules
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
     working_dir: /app/frontend
-    command: npm run dev
+    command: pnpm dev
   media-browser-backend:
-    build: 
+    build:
       context: ./server/
       dockerfile: Dockerfile
     container_name: media-app-backend
@@ -28,9 +29,6 @@ services:
       - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
       - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
       - ./server/nodemon.json:/app/server/nodemon.json
-      # - /server/node_modules
-      # - /app/server/node_modules
-      # - ./server/node_modules:/app/backend/node_modules
     ports:
       - 3000:3000
     expose:
@@ -39,10 +37,8 @@ services:
       - database
     links:
       - database
-    working_dir: /app/
-    command: pnpm start-backend
-    # command: ls -a
-    # command: find ./node_modules/ -type l -ls
+    working_dir: /app/server
+    command: pnpm start
   database:
     container_name: postgres
     image: postgres
