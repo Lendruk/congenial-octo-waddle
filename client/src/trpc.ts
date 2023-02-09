@@ -7,7 +7,10 @@ export const trpc = createTRPCSolid<AppRouter>();
 export const client = trpc.createClient({
   links: [
     httpBatchLink({
-      url: "/",
+      url: "http://localhost:3000",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
     }),
   ],
 });

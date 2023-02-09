@@ -1,25 +1,19 @@
-import { A } from "solid-start";
-import Counter from "~/components/Counter";
+import Button from "~/components/Button";
+import { trpc } from "~/trpc";
 
 export default function Home() {
+  const t = trpc.greeting.useQuery();
+  // const [data, { mutate, refetch }] = createResource(fetchData);
   return (
-    <main class="text-center mx-auto text-gray-700 p-4">
-      <h1 class="max-6-xs text-6xl text-sky-700 font-thin uppercase my-16">Hello world!</h1>
-      <Counter />
-      <p class="mt-8">
-        Visit{" "}
-        <a href="https://solidjs.com" target="_blank" class="text-sky-600 hover:underline">
-          solidjs.com
-        </a>{" "}
-        to learn how to build Solid apps.
-      </p>
-      <p class="my-4">
-        <span>Home</span>
-        {" - "}
-        <A href="/about" class="text-sky-600 hover:underline">
-          About Page
-        </A>{" "}
-      </p>
+    <main class="flex h-full flex-1 flex-col ">
+      {/* <h1 class="text-5xl blur-sm">Great Title</h1>
+      <div class="flex gap-2">
+        <div class="bg-red-800">Raul</div>
+        <div class="bg-black">Gillete</div>
+      </div> */}
+      <Button onClick={() => console.log("goood")}>button is good</Button>
+      <div>{t.data}</div>
+      {/* <div class="my-7 animate-bounce rounded-full bg-yellow-600">B</div> */}
     </main>
   );
 }

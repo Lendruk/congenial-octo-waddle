@@ -3,5 +3,5 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [solid()],
-  server: { host: "0.0.0.0" },
+  server: { cors: true, host: "localhost", port: 4000 },
 });
