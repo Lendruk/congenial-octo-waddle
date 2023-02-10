@@ -1,7 +1,7 @@
 // @refresh reload
 import { Suspense } from "solid-js";
 import { trpc, client, queryClient } from "./trpc";
-import { useLocation, A, Body, ErrorBoundary, FileRoutes, Head, Html, Meta, Routes, Scripts, Title } from "solid-start";
+import { useLocation, Body, ErrorBoundary, FileRoutes, Head, Html, Meta, Routes, Scripts, Title } from "solid-start";
 import "./root.css";
 import Sidebar from "./components/Sidebar";
 
